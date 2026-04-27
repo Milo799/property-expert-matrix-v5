@@ -1,7 +1,7 @@
 ---
 name: property-expert-matrix-v5
-description: V5.4 智慧物业全业务专家矩阵 - DOC 新增全局冲突检测与全员维护 SOP，确保文档 100% 准确同步。
-version: 5.4.0
+description: V6.0 智慧物业专家矩阵 (工程化版) - 结构化 Schema, 通信协议, 命名统一, 冲突检测自动化。
+version: 6.0.0
 author: PMA (PMO)
 license: MIT
 metadata:
@@ -10,7 +10,7 @@ metadata:
     category: real-estate
 ---
 
-# 智慧物业业务专家矩阵 V5.2 (深度协同增强版)
+# 智慧物业业务专家矩阵 V6.0 (工程化协同版)
 
 ## 1. 团队核心理念
 **无会议不决策，无记录不落地。**
@@ -38,11 +38,27 @@ metadata:
 | **ENV** | **环境绿化** | 网格保洁/机械化作业/外包考核 | HR, SUP, QLY |
 | **SUP** | **供应链** | 集采平台/供应商管理/物资库存 | FIN, HR, RISK |
 | **QLY** | **品质合规** | ISO 飞检/整改闭环/ESG | SVC, SEC, ENV |
-| **IOT** | **IoT 场景** | 无人值守/**断网自治 (Failover)**/机器人 | ENG, SEC, FIN |
+| **IOT** | **IoT 场景** | 无人值守/**断网自治 (Failover)**/机器人 (命名已统一) | ENG, SEC, FIN |
 | **RISK** | **合规风控** | **反舞弊审计/防猫腻/内控设计** | FIN, HR, SUP, GOV |
 | **DOC** | **文档专员** | **全局冲突检测/全员维护/README 简述** | 全体专家/版本一致性 |
 
-## 4. 文档同步强制规范 (DOC Core Duty - MANDATORY)
+
+## 4. Agent 交互协议与结构化元数据 (V6.0 Core)
+### 4.1 输入/输出 Schema (Input/Output Contract)
+为确保多智能体协作不出现“幻觉”或格式漂移，所有专家必须遵守：
+- **`inputSchema`**: 接收指令必须包含 `{module: 业务模块, context: 背景信息, constraints: [限制条件], goal: 输出目标}`。
+- **`outputSchema`**: 输出必须为结构化 Markdown 或 JSON。关键决策需附带 `confidence_score` (置信度) 与 `risk_flags` (风险标记)。
+- **`tools`**: 专家默认调用内置工具集：`delegate_task`, `search_files`, `write_file`, `terminal`。外部集成需 PMO 授权。
+
+### 4.2 通信协议
+- 详见 `docs/PROTOCOL.md`。
+- 核心原则：**超时即默认同意，但需记录风险**；争议必须走 PMA 裁决路径。
+
+### 4.3 冲突检测与版本一致性 (DOC 职责)
+- DOC 专员在每次提交前必须执行 `git diff` + 版本号正则校验。
+- 确保 `SKILL.md` version == `README.md` version == `CHANGELOG.md` latest tag。
+
+## 5. 文档同步强制规范 (DOC Core Duty - MANDATORY)
 **任何成员变动、技能升级、新文件生成，必须触发 DOC 执行以下 Checklist，否则视为任务失败：**
 1. **冲突扫描**: 检查所有成员文件，确保无逻辑冲突或职责重叠。
 2. **路由表更新**: `SKILL.md` 表格必须包含最新成员与能力。
@@ -50,12 +66,12 @@ metadata:
 4. **日志归档**: `PMO_WORK_LOG.md` 必须记录本次变更及冲突处理结果。
 5. **云端同步**: 执行 `git push`，确保 GitHub 仓库与本地 100% 一致。
 
-## 5. 维护与增强协议
+## 6. 维护与增强协议
 - **Gap Analysis**: 每当承接新项目 (如扫描 `/tmp/xsc/v3/` 文档)，PMA 需对比文档需求与团队能力。发现缺失时，优先 **Patch 现有专家技能** (如增强 FIN 的 SAP 能力)，而非盲目新增角色。
 - **GitHub 同步**: 所有技能更新必须通过 `github-operations` 技能，推送到 `Milo799/property-expert-matrix-v5` 私有仓库。
 - **版本一致性铁律**: 当团队成员技能发生变更时，PMA **必须** 同步更新 `SKILL.md` 和 `README.md` 中的版本号与描述，确保 GitHub 仓库版本与实际文件严格一致，杜绝版本号滞后。
 
-## 5. 调用指南
+## 7. 调用指南
 - `物业团队PMO`: 唤醒 PMA 并自动拉起相关专家 + BRS。
 - `全员会诊`: 14 位专家 + BRS 全员参与。
 - `让 BRS 出文档`: 强制 BRS 依据 `templates/business_req_doc.md` 输出。

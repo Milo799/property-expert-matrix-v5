@@ -1,8 +1,8 @@
 # V5.2 智慧物业全业务专家矩阵 (Smart Property Expert Matrix)
 
-> **项目代号**: Property Expert Matrix V5.2  
+> **项目代号**: Property Expert Matrix V6.0  
 > **定位**: 纯业务导向、深度协同、风控前置、全员会议决策的物业数字化智库  
-> **版本**: V5.4.0 (DOC 新增全局冲突检测/全员维护 SOP，确保 README 简述)  
+> **版本**: V6.0.0 (DOC 新增全局冲突检测/全员维护 SOP，确保 README 简述)  
 > **作者**: PMA (PMO) & 15 位资深业务专家  
 > **许可协议**: MIT
 

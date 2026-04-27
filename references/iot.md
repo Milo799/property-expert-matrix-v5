@@ -1,5 +1,5 @@
 ---
-role: smart
+role: iot
 title: IoT 场景与机器人专家
 ---
 
