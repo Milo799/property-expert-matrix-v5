@@ -1,7 +1,7 @@
 ---
 name: property-expert-matrix-v5
-description: V6.0 智慧物业专家矩阵 (工程化版) - 结构化 Schema, 通信协议, 命名统一, 冲突检测自动化。
-version: 6.0.0
+description: V6.1 智慧物业专家矩阵 (轻量化版) - Map-Reduce 架构, 动态按需加载, 增量冲突检测, 上下文优化。
+version: 6.1.0
 author: PMA (PMO)
 license: MIT
 metadata:
@@ -44,7 +44,12 @@ metadata:
 
 
 ## 4. Agent 交互协议与结构化元数据 (V6.0 Core)
-### 4.1 输入/输出 Schema (Input/Output Contract)
+### 4.1 Map-Reduce 调度架构 (V6.1 核心)
+- **Map (分发)**: PMO 根据意图分析，仅 `read_file` 加载 **3-5 个相关专家**。使用 `delegate_task` **并发**执行，避免上下文爆炸。
+- **Reduce (汇总)**: PMO 收集结果，解决冲突。
+- **Synthesis (汇编)**: 将结构化数据投喂给 BRS 生成文档。
+
+### 4.2 输入/输出 Schema (Input/Output Contract)
 为确保多智能体协作不出现“幻觉”或格式漂移，所有专家必须遵守：
 - **`inputSchema`**: 接收指令必须包含 `{module: 业务模块, context: 背景信息, constraints: [限制条件], goal: 输出目标}`。
 - **`outputSchema`**: 输出必须为结构化 Markdown 或 JSON。关键决策需附带 `confidence_score` (置信度) 与 `risk_flags` (风险标记)。
