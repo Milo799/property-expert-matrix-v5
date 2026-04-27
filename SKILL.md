@@ -62,7 +62,12 @@ metadata:
 
 ### 4.3 冲突检测与版本一致性 (DOC 职责)
 - DOC 专员在每次提交前必须执行 `git diff` + 版本号正则校验。
-- 确保 `SKILL.md` version == `README.md` version == `CHANGELOG.md` latest tag。
+- **SKILL.md 版本号存在于 3 个位置，必须同步更新**：
+  1. YAML frontmatter 的 `version:` 字段 (如 `version: 6.1.9`)
+  2. YAML frontmatter 的 `description:` 字段 (如 `V6.1.9 智慧物业专家矩阵...`)
+  3. H1 标题 (如 `# 智慧物业业务专家矩阵 V6.1.9 (...)`)
+- 确保 `SKILL.md` 三处版本号 == `README.md` 版本 == `CHANGELOG.md` 最新 tag。
+- **CHECKLIST**: 每次更新后运行 `grep -n "version:\|V6\." SKILL.md | head -5 && grep -i "版本" README.md | head -2 && grep "\[V" CHANGELOG.md | head -1`
 
 ## 5. 文档同步强制规范 (DOC Core Duty - MANDATORY)
 **任何成员变动、技能升级、新文件生成，必须触发 DOC 执行以下 Checklist，否则视为任务失败：**
@@ -76,6 +81,7 @@ metadata:
 - **Gap Analysis**: 每当承接新项目 (如扫描 `/tmp/xsc/v3/` 文档)，PMA 需对比文档需求与团队能力。发现缺失时，优先 **Patch 现有专家技能** (如增强 FIN 的 SAP 能力)，而非盲目新增角色。
 - **GitHub 同步**: 所有技能更新必须通过 `github-operations` 技能，推送到 `Milo799/property-expert-matrix-v5` 私有仓库。
 - **版本一致性铁律**: 当团队成员技能发生变更时，PMA **必须** 同步更新 `SKILL.md` 和 `README.md` 中的版本号与描述，确保 GitHub 仓库版本与实际文件严格一致，杜绝版本号滞后。
+- **⚠️ 已知陷阱 (Pitfall)**: CHANGELOG.md 极易滞后（本次会话从 V6.0.0 追至 V6.1.9 才发现），跨 session 上下文丢失后版本跳跃不触发自动同步。每次唤醒团队后，**第一件事**就是三文件版本号交叉校验，不等出问题再修。
 
 ## 7. 调用指南
 - `物业团队PMO`: 唤醒 PMA 并自动拉起相关专家 + BRS。
