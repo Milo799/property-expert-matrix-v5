@@ -1,7 +1,7 @@
 ---
 name: property-expert-matrix-v5
-description: V5.3 智慧物业全业务专家矩阵 - 新增文档维护专员 (DOC)，确立文档 100% 同步 SOP - 全量技能增强，扩充合规全景库(50+手法)，完善 SAP/ERP 对接、商业稽核与断网自治。
-version: 5.3.0
+description: V5.4 智慧物业全业务专家矩阵 - DOC 新增全局冲突检测与全员维护 SOP，确保文档 100% 准确同步。
+version: 5.4.0
 author: PMA (PMO)
 license: MIT
 metadata:
@@ -40,8 +40,17 @@ metadata:
 | **QLY** | **品质合规** | ISO 飞检/整改闭环/ESG | SVC, SEC, ENV |
 | **IOT** | **IoT 场景** | 无人值守/**断网自治 (Failover)**/机器人 | ENG, SEC, FIN |
 | **RISK** | **合规风控** | **反舞弊审计/防猫腻/内控设计** | FIN, HR, SUP, GOV |
+| **DOC** | **文档专员** | **全局冲突检测/全员维护/README 简述** | 全体专家/版本一致性 |
 
-## 4. 维护与增强协议
+## 4. 文档同步强制规范 (DOC Core Duty - MANDATORY)
+**任何成员变动、技能升级、新文件生成，必须触发 DOC 执行以下 Checklist，否则视为任务失败：**
+1. **冲突扫描**: 检查所有成员文件，确保无逻辑冲突或职责重叠。
+2. **路由表更新**: `SKILL.md` 表格必须包含最新成员与能力。
+3. **对外文档重构**: `README.md` 必须更新版本号、成员列表、**且必须包含本次变更的简要描述**。
+4. **日志归档**: `PMO_WORK_LOG.md` 必须记录本次变更及冲突处理结果。
+5. **云端同步**: 执行 `git push`，确保 GitHub 仓库与本地 100% 一致。
+
+## 5. 维护与增强协议
 - **Gap Analysis**: 每当承接新项目 (如扫描 `/tmp/xsc/v3/` 文档)，PMA 需对比文档需求与团队能力。发现缺失时，优先 **Patch 现有专家技能** (如增强 FIN 的 SAP 能力)，而非盲目新增角色。
 - **GitHub 同步**: 所有技能更新必须通过 `github-operations` 技能，推送到 `Milo799/property-expert-matrix-v5` 私有仓库。
 - **版本一致性铁律**: 当团队成员技能发生变更时，PMA **必须** 同步更新 `SKILL.md` 和 `README.md` 中的版本号与描述，确保 GitHub 仓库版本与实际文件严格一致，杜绝版本号滞后。
