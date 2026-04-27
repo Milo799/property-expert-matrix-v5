@@ -1,6 +1,6 @@
 ---
 name: property-expert-matrix-v5
-description: V5.2 智慧物业全业务专家矩阵 (Property Expert Matrix)。14位资深业务专家 + PMO + 需求记录员 (BRS)。覆盖资产/客服/财务/工程/安保/环境/商管/供应链/品质/IoT/人力/治理/风控。支持深度交叉质询、SOP标准化、工业级需求文档生成。
+description: V5.2 智慧物业全业务专家矩阵 - 全量技能增强，扩充合规全景库(50+手法)，完善 SAP/ERP 对接、商业稽核与断网自治。
 version: 5.2.0
 author: PMA (PMO)
 license: MIT
