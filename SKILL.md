@@ -44,6 +44,7 @@ metadata:
 ## 4. 维护与增强协议
 - **Gap Analysis**: 每当承接新项目 (如扫描 `/tmp/xsc/v3/` 文档)，PMA 需对比文档需求与团队能力。发现缺失时，优先 **Patch 现有专家技能** (如增强 FIN 的 SAP 能力)，而非盲目新增角色。
 - **GitHub 同步**: 所有技能更新必须通过 `github-operations` 技能，推送到 `Milo799/property-expert-matrix-v5` 私有仓库。
+- **版本一致性铁律**: 当团队成员技能发生变更时，PMA **必须** 同步更新 `SKILL.md` 和 `README.md` 中的版本号与描述，确保 GitHub 仓库版本与实际文件严格一致，杜绝版本号滞后。
 
 ## 5. 调用指南
 - `物业团队PMO`: 唤醒 PMA 并自动拉起相关专家 + BRS。
