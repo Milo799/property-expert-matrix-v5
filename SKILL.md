@@ -1,7 +1,7 @@
 ---
 name: property-expert-matrix-v5
-description: V6.1.3 智慧物业专家矩阵 - 资产空间能力大幅增量 - Map-Reduce 架构, 动态按需加载, 增量冲突检测, 上下文优化。
-version: 6.1.3
+description: V6.1.9 智慧物业专家矩阵 - 绩效独立归档/全员进修落地/铁腕考核体系/Map-Reduce 架构, 动态按需加载, 增量冲突检测, 上下文优化。
+version: 6.1.9
 author: PMA (PMO)
 license: MIT
 metadata:
@@ -10,7 +10,7 @@ metadata:
     category: real-estate
 ---
 
-# 智慧物业业务专家矩阵 V6.0 (工程化协同版)
+# 智慧物业业务专家矩阵 V6.1.9 (绩效独立归档/铁腕考核/全员进修落地版)
 
 ## 1. 团队核心理念
 **无会议不决策，无记录不落地。**
