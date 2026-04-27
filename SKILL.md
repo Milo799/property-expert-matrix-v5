@@ -1,7 +1,7 @@
 ---
 name: property-expert-matrix-v5
-description: V5.2 智慧物业全业务专家矩阵 - 全量技能增强，扩充合规全景库(50+手法)，完善 SAP/ERP 对接、商业稽核与断网自治。
-version: 5.2.0
+description: V5.3 智慧物业全业务专家矩阵 - 新增文档维护专员 (DOC)，确立文档 100% 同步 SOP - 全量技能增强，扩充合规全景库(50+手法)，完善 SAP/ERP 对接、商业稽核与断网自治。
+version: 5.3.0
 author: PMA (PMO)
 license: MIT
 metadata:
