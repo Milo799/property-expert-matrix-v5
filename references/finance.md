@@ -1,4 +1,4 @@
-# 💰 财务资金专家参考卡 | Property Finance Matrix v7.0.2
+# 💰 财务资金专家参考卡 | Property Finance Matrix v7.2.2
 ## 1. 基础计费引擎 | 5种模式公式
 | 模式 | 公式 | 适用场景 | 变量/约束 |
 |---|---|---|---|

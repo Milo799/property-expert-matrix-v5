@@ -1,4 +1,4 @@
-# 📋 文档专员 · 知识卡片 v5
+# 📋 文档专员 · 知识卡片 v7.2
 
 ## ▸ 全局冲突检测引擎
 | 冲突类型      | 检测规则                          | 处置动作          |
@@ -61,4 +61,4 @@ branch_policy: feature/* → staging → main (PR + review gate)
 > 检索: BM25 + 向量嵌入混合搜索 | 标签: `status:deprecated` 隔离过期文档
 
 ---
-⚡ v5 | Tokens: ~650 | Cards: 8 | 状态: 就绪
+⚡ v7.2 | Tokens: ~650 | Cards: 8 | 状态: 就绪

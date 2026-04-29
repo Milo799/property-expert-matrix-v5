@@ -1,3 +1,4 @@
+# compliance_risk.md | V7.2 Knowledge Card
 ---
 role: compliance_risk
 title: 合规风控专家 (审计/反舞弊/内控/SOD)

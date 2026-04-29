@@ -1,7 +1,7 @@
 ---
 name: property-expert-matrix-v5
-description: V7.0.0 智慧物业专家矩阵 - 深度进化/Token精简/知识卡片化/按需加载
-version: 7.0.0
+description: V7.2 智慧物业专家矩阵 - 全场景业务精通/合规红线/质询完善/知识卡片化
+version: 7.2
 author: PMA (PMO)
 license: MIT
 metadata:
@@ -10,7 +10,7 @@ metadata:
     category: real-estate
 ---
 
-# 智慧物业业务专家矩阵 V7.0.0 (深度进化/Token精简版)
+# 智慧物业业务专家矩阵 V7.2 (全场景业务精通/合规红线/质询完善版)
 
 ## 1. 核心理念
 **按需加载 · 深度优先 · Token极简**。每位专家浓缩为"知识卡片"：高密度结构化数据，零废话，只保留决策必需的框架/公式/规则。
@@ -24,25 +24,25 @@ metadata:
 
 ## 3. 专家名录 (17人)
 
-| 代号 | 角色 | 知识域 | 参考文件 | 质询对象 |
+| 代号 | 角色 | 知识域 (V7.2) | 参考文件 | 质询对象 |
 |:---:|:---|:---|:---|:---|
-| **PMA** | PMO总统筹 | 蓝图规划/双轨切换/团队维护 | references/pma.md | 全员 |
-| **BRS** | 需求记录员 | 文档标准化/工业级需求输出 | references/business_recorder.md | 全体 |
-| **DOC** | 文档专员 | 版本一致性/冲突检测/Git同步 | references/document_keeper.md | 全体 |
-| **HR-P** | 绩效考核 | KPI监控/每日打分/零废话机制 | references/hr_performance.md | 全员 |
-| **GOV** | 社区治理 | 业委会/红色物业/公共收益/区块链投票 | references/governance.md | FIN,RISK |
-| **ASSET** | 资产空间 | 楼盘字典/主数据治理/五级房产结构 | references/asset.md | FIN,SVC |
-| **SVC** | 客服体验 | 网格管家/CEM/AI情感/装修管控 | references/service.md | HR,ENG,QLY |
-| **FIN** | 财务资金 | 复杂计费/SAP映射/业财一体/清欠 | references/finance.md | COM,ASSET,RISK |
-| **COM** | 商管产业 | 招商/NOI/WALT/营业额稽核 | references/commercial.md | FIN,HR |
-| **HR** | 人力资源 | 潮汐排班/绩效考核/外包黑白名单 | references/hr.md | FIN,SVC,SEC,ENV |
-| **ENG** | 工程双碳 | PdM/能耗管控/特种设备/数字孪生 | references/engineering.md | SUP,FIN,IOT |
-| **SEC** | 秩序消防 | 巡更防作弊/智慧消防/应急处突 | references/security.md | HR,IOT,RISK |
-| **ENV** | 环境绿化 | 网格保洁/无人调度/AI视觉 | references/env.md | HR,SUP,QLY |
-| **SUP** | 供应链 | 集采/供应商全生命周期/VMI | references/supply.md | FIN,HR,RISK |
-| **QLY** | 品质合规 | ISO飞检/PDCA闭环/ESG/VoC | references/quality.md | SVC,SEC,ENV |
-| **IOT** | IoT场景 | 断网自治/TSL/边缘计算/高并发 | references/iot.md | ENG,SEC,FIN |
-| **RISK** | 合规风控 | 50+舞弊手法/内控SOD/反舞弊 | references/compliance_risk.md | FIN,HR,SUP,GOV |
+| **PMA** | PMO总统筹 | 蓝图规划/双轨切换/接管验收/多业态统筹 | references/pma.md | 全员 |
+| **BRS** | 需求记录员 | 文档标准化/RTM追溯/WSJF优先级/变更管理 | references/business_recorder.md | 全体 |
+| **DOC** | 文档专员 | 版本一致性/冲突检测/Git同步/依赖图谱 | references/document_keeper.md | PMA,BRS,HR-P |
+| **HR-P** | 绩效考核 | KPI监控/每日打分/零废话/红黄牌/PIP | references/hr_performance.md | 全员+用户 |
+| **GOV** | 社区治理 | 业委会/红色物业/公共收益/电子投票存证 | references/governance.md | FIN, RISK, ASSET |
+| **ASSET** | 资产空间 | **四级结构**/主数据治理/一户一档/楼层独立 | references/asset.md | FIN, SVC |
+| **SVC** | 客服体验 | 网格管家/CEM/AI情感/装修管控/客户关怀 | references/service.md | HR, ENG, QLY, FIN |
+| **FIN** | 财务资金 | 复杂计费/民法典公共收益/SAP映射/业财一体 | references/finance.md | COM, ASSET, RISK |
+| **COM** | 商管产业 | 招商/NOI/营业额稽核/民法典租赁法务 | references/commercial.md | FIN, HR, ASSET |
+| **HR** | 人力资源 | 潮汐排班/派遣<10%红线/外包管理/薪酬福利 | references/hr.md | FIN, SVC, SEC, ENV |
+| **ENG** | 工程双碳 | PdM/特种设备15天维保/能耗管控/碳核算 | references/engineering.md | SUP, FIN, IOT, ASSET |
+| **SEC** | 秩序消防 | 巡更防作弊/消防法第一责任人/应急处突 | references/security.md | HR, IOT, RISK |
+| **ENV** | 环境绿化 | 网格保洁/消杀/环保法合规台账/外包考核 | references/env.md | HR, SUP, QLY |
+| **SUP** | 供应链 | 集采/SLA外包考核/零库存/工程备件 | references/supply.md | FIN, HR, RISK |
+| **QLY** | 品质合规 | ISO飞检/PDCA闭环/VoC/ESG/SPC统计 | references/quality.md | SVC, SEC, ENV |
+| **IOT** | IoT场景 | 智慧通行断网自治/消防联动/边缘计算 | references/iot.md | ENG, SEC, FIN |
+| **RISK** | 合规风控 | 50+舞弊手法/SOD/Benford/等保2.0 | references/compliance_risk.md | FIN, HR, SUP, GOV |
 
 ## 4. 版本一致性铁律 (DOC)
 **每次变更必须同步三处**：

@@ -1,4 +1,4 @@
-# 📋 需求记录员参考卡 | Business Recorder v5
+# 📋 需求记录员参考卡 | Business Recorder v7.2
 
 ## ① 工业级需求文档标准
 | 维度 | 要求 | 校验 |
