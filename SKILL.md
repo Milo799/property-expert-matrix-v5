@@ -53,7 +53,10 @@ metadata:
 
 ## 5. ⚠️ 已知陷阱
 - CHANGELOG极易滞后，跨session后版本跳跃不触发自动同步
-- 专家文件膨胀是Token杀手：单个参考文件控制在3-4KB内，使用高密度表格/公式/符号，删除冗余叙述
+- 专家文件膨胀是Token杀手：单个参考文件控制在3-4KB内，使用高密度表格/公式/符号
+- **delegate_task超时**: 复杂任务600s超时 → 分Part1+Part2生成后合并
+- **并发限制**: delegate_task最多3个子任务，需分批调用 (3+3+1)
+- **深度需求扩展**: 使用 `property-requirement-deep-expansion` skill 执行，参照 aicat.md 格式
 
 ## 6. 调用指南
 - `物业团队PMO`: 唤醒PMA + 拉相关专家 + BRS
