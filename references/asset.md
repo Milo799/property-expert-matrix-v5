@@ -1,56 +1,48 @@
-# 资产空间专家参考 | Asset Space Expert Reference v5
-## ① 四级房产资源结构 🏗️ 行业标准 + 元数据扩展
-| 层级 | 标识 | 粒度 | 行业适配示例 |
+# 资产空间专家参考 | Asset Space Expert Reference v7.0.1
+## ① 四级标准结构 + 楼层独立 + 元数据扩展 🏗️
+| 层级 | 标识 | 定义 | 行业对标 |
 |------|------|------|----------|
-| L1 项目 Project | `PR-{code}` | 独立产权/物理边界 | 住宅社区/写字楼/商业综合体 |
-| L2 楼栋 Building | `BL-{pr}-{code}` | 单体建筑/期数/苑区 | A栋/1期/东区/商业裙楼 |
-| L3 单元/楼层 Unit | `UT-{bl}-{code}` | 垂直分段/水平分区 | 单元/楼层/功能区 |
-| L4 房间 Room | `RM-{ut}-{code}` | 最小使用单元 | 住宅户/商铺/车位/机房 |
-> 📐 **编码**: `{L1}{L2}{L3}{L4}` 级联, `parent_id` 双向导航
-> 🧩 **扩展**: `metadata` JSONB 存储 `zone/district/phase/type` 等自定义维度，不增加固定层级
+| **L1 项目** | `PRJ-{code}` | 独立产权/物理边界/核算单位 | 明源/万物云：Project |
+| **L2 楼栋** | `BLD-{code}` | 单体建筑/期数/组团 | 碧桂园：Bldg/Phase |
+| **L3 单元** | `UNT-{code}` | 逻辑分组 (住宅单元/商业楼层) | 龙湖：Unit/Functional Area |
+| **L4 房间** | `RM-{code}` | 最小租赁/销售/管理单元 | 金蝶：Room/Shop |
+> 📐 **核心原则**: `楼层 (Floor)` 不是独立物理层级，而是 **房间的核心属性**。
+> 🧩 **6 级扩展**: 超大盘通过 `metadata` (JSONB) 存储 `zone/district/city`，**不改物理表结构**。
 
-## ② 一户一档全景视图 🗂️ 12数据域实时聚合
-①权属信息 ②物理属性 ③合同档案 ④财务账单 ⑤能耗计量 ⑥维修记录 ⑦装修备案 ⑧租户画像 ⑨合规证照 ⑩安防设备 ⑪社区活动 ⑫投诉工单
-```
-聚合引擎: CQRS + EventSourcing → RoomView{domains: [D1..D12], version: ulong, ts: now}
-```
-## ③ 房产状态机 🔄 9阶段生命周期
-```
-[在建]──竣工备案──→[预售]──交付通知──→[交付]──钥匙交接──→[入住]
-                                                        ↓
-[报废]←──鉴定报废←──[空置](90d+)←──退租结算←──[退住]←──退住申请←──[正常]
-                          ↓                          ↓
-                       [装修]←──装修审批←──装修申请←──[入住]
-状态转换约束: 仅允许相邻状态跳转, 跨级需审批流; 每步产生 AuditLog{from,to,actor,ts,reason}
-```
+## ② 楼层处理策略 (PMO 评审定案) 📉
+**方案**: `room` 表设 `floor_number` (独立字段) + `room_no` (编码)。
+| 场景 | `room_no` 示例 | `floor_number` | 说明 |
+|------|---------------|----------------|------|
+| 普通住宅 | 1201 | 12 | 常规逻辑，房号隐含楼层 |
+| 商业首层 | S101 | 1 (或 "L1") | 溢价区，需独立索引 |
+| 地下室/车库 | B1-005 | -1 | 负数楼层，独立逻辑 |
+| 特殊层 (PH) | PH-02 | PH | 顶楼复式，字母标识 |
+> ⚠️ **禁止**: 严禁在物理层级中硬编码楼层表 (O(N^5) JOIN 风险)。
+> ✅ **优势**: `GROUP BY floor_number` 实现楼层租金热力图、IoT 设备聚合。
 
-## ④ 共有产权管理 ⚖️
-| 业主 | 份额比例 pᵢ | 表决权权重 wᵢ = pᵢ × f(pᵢ) | 决策规则 |
-|------|------------|---------------------------|----------|
-| A | 50% | 0.50×1.0 = 0.50 | 重大事项 ≥2/3 表决权 |
-| B | 30% | 0.30×1.0 = 0.30 | 一般事项 ≥1/2 表决权 |
-| C | 20% | 0.20×1.0 = 0.20 | 一票否决: pᵢ≥50%时生效 |
-> 表决权修正: f(pᵢ) = 1 + λ·log(1+pᵢ), λ∈[0,0.1]; 总份额 Σpᵢ = 100%
+## ③ 一户一档全景视图 🗂️ 12 数据域
+①权属 ②物理属性 ③合同 ④财务 ⑤能耗 ⑥维修 ⑦装修 ⑧租户 ⑨证照 ⑩安防 ⑪活动 ⑫投诉
+> 聚合: CQRS 模式 → `RoomView{domains, version, ts}`
 
-## ⑤ 客户合并与拆分 🔀
-**相似度算法**: `Sim(A,B) = α·Jaccard(name) + β·Levenshtein(phone) + γ·ExactMatch(idCard)`
-| 规则 | 阈值 | 动作 |
-|------|------|------|
-| Sim ≥ 0.95 | 自动合并 | 保留最新字段+合并关联资产 |
-| 0.80 ≤ Sim < 0.95 | 人工审核 | 展示Diff+冲突标记 |
-| Sim < 0.80 | 跳过 | 无操作 |
-**冲突检测**: 字段值不同 → 优先级: 官方证件 > 合同 > 系统录入 > 历史快照
-**拆分规则**: 合并后30d内可回滚; 拆分产生 SplitEvent{src, dst[], audit[]}
+## ④ 房产状态机 🔄 9 阶段
+```
+[在建]→[预售]→[交付]→[入住]→[装修]→[正常]
+                                ↓        ↓
+                             [空置]←[退住]→[报废]
+```
+约束: 跨级跳转需审批 (AuditLog 记录 from/to/reason)。
 
-## ⑥ 数据校验规则 ✅ 24项必填 + 8条业务规则
-**必填字段**: `id, project_code, bldg_code, unit_code, room_code, floor, area_usable, area_build, orientation, room_type, status, owner_id, contract_id, price_unit, price_total, pay_method, energy_meter, fire_device, entry_date, last_update, created_by, tags[], geo_point, metadata{}`
+## ⑤ 共有产权 ⚖️ & 合并拆分 🔀
+- **表决**: `wᵢ = pᵢ × (1 + λ·log(1+pᵢ))`，重大事项 ≥2/3 通过。
+- **合并**: `Sim(A,B) ≥ 0.95` 自动合并；冲突优先级：证件 > 合同 > 系统。
+- **拆分**: 30d 回滚窗口，原子事务 `SplitEvent{src, dst[], audit[]}`。
+
+## ⑥ 业务校验规则 ✅ 8 条核心 (R01-R08)
 | # | 规则 | 表达式 | 级别 |
 |---|------|--------|------|
-| R01 | 面积正数 | area_usable > 0 ∧ area_build ≥ area_usable | ERROR |
-| R02 | 楼层合理 | 1 ≤ floor ≤ bldg.total_floors | ERROR |
-| R03 | 价格区间 | 0 < price_unit ≤ 500000 | WARN |
-| R04 | 状态一致性 | status ∈ 状态机合法值 | ERROR |
-| R05 | 编码级联 | PR→BL→UT→RM 父链存在 | ERROR |
-| R06 | 产权约束 | Σownership_pct = 100% | ERROR |
-| R07 | 日期逻辑 | entry_date ≤ today ∧ last_update ≥ created_at | ERROR |
-| R08 | 能耗上限 | monthly_energy ≤ area_build × threshold_kwh | WARN |
+| R01 | 面积正数 | `usable > 0 ∧ build ≥ usable` | ERROR |
+| R02 | 楼层一致性 | `floor` ∈ 楼栋允许范围 | ERROR |
+| R03 | 编码级联 | `PRJ→BLD→UNT→RM` 链路完整 | ERROR |
+| R04 | 产权 100% | `Σ(pᵢ) = 100%` | ERROR |
+| R05 | 状态合法 | `status` ∈ 状态机图 | ERROR |
+| R06 | 价格阈值 | `unit_price` ≤ 区域限价 | WARN |
