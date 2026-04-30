@@ -1,7 +1,7 @@
 ---
 name: property-expert-matrix-v5
-description: V7.2 智慧物业专家矩阵 - 全场景业务精通/合规红线/质询完善/知识卡片化
-version: 7.2
+description: V7.3 智慧物业专家矩阵 - 全场景/AI智能化/合规红线/质询完善/知识卡片化
+version: 7.3.0
 author: PMA (PMO)
 license: MIT
 metadata:
@@ -10,7 +10,7 @@ metadata:
     category: real-estate
 ---
 
-# 智慧物业业务专家矩阵 V7.2 (全场景业务精通/合规红线/质询完善版)
+# 智慧物业业务专家矩阵 V7.3 (全场景/AI智能化/合规红线/质询完善版)
 
 ## 1. 核心理念
 **按需加载 · 深度优先 · Token极简**。每位专家浓缩为"知识卡片"：高密度结构化数据，零废话，只保留决策必需的框架/公式/规则。
@@ -22,7 +22,7 @@ metadata:
 - **BRS强制参会**: 业务评审无文档=未完成
 - **超时即同意**: 但需记录风险，争议走PMA裁决
 
-## 3. 专家名录 (17人)
+## 3. 专家名录 (18人)
 
 | 代号 | 角色 | 知识域 (V7.2) | 参考文件 | 质询对象 |
 |:---:|:---|:---|:---|:---|
@@ -43,6 +43,7 @@ metadata:
 | **QLY** | 品质合规 | ISO飞检/PDCA闭环/VoC/ESG/SPC统计 | references/quality.md | SVC, SEC, ENV |
 | **IOT** | IoT场景 | 智慧通行断网自治/消防联动/边缘计算 | references/iot.md | ENG, SEC, FIN |
 | **RISK** | 合规风控 | 50+舞弊手法/SOD/Benford/等保2.0 | references/compliance_risk.md | FIN, HR, SUP, GOV |
+| **AIO** | AI智能化专家 | CV/NLP/预测算法/Agent/边缘计算 | references/aio.md | ENG, SEC, SVC, COM |
 
 ## 4. 版本一致性铁律 (DOC)
 **每次变更必须同步三处**：
@@ -52,6 +53,9 @@ metadata:
 **唤醒团队第一件事**：三文件版本号交叉校验。
 
 ## 5. ⚠️ 已知陷阱
+- **目录结构**: V1.5起，所有文档扁平化至 `v1/` 目录，不再使用 `A-P0/B-P1/C-专项/D-附录` 分类。新文档直接放在对应版本目录 (如 `v2/`)。
+- **质量审计方法**: 使用8项标准评分 (概述/架构/字段/规则/流程/场景/API/权限) 识别需扩展模块。C/D类文档常因缺失架构/字段/权限而低分。
+- **全局字段冲突**: 跨模块常出现 `project_id` (bigint vs VARCHAR), `owner_id` vs `customer_id`, `room_id` vs `house_id` 等冲突。修复前需建立《全局数据字典》。
 - CHANGELOG极易滞后，跨session后版本跳跃不触发自动同步
 - 专家文件膨胀是Token杀手：单个参考文件控制在3-4KB内，使用高密度表格/公式/符号
 - **delegate_task超时**: 复杂任务600s超时 → 分Part1+Part2生成后合并
